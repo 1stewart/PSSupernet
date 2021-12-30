@@ -7,7 +7,7 @@ on:
 jobs:
   release:
     if: |
-      github.event_name == 'push' )
+      github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -15,10 +15,4 @@ jobs:
     - name: PSScriptAnalyzer tests
       shell: pwsh
       run: |
-        Get-ChildItem $env
-    # - uses: "marvinpinto/action-automatic-releases@latest"
-    #   with:
-    #     title: "${{ github.ref_name }}"
-    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #     prerelease: false
-
+        Get-ChildItem env:
