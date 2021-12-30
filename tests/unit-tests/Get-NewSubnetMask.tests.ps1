@@ -45,7 +45,7 @@ Describe "Get-NewSubnetMask tests" {
             param (
                 $Value
             )
-                (Get-NewSubnetMask -NetworkBits $Value).GetType() | Should -Be 'ystem.Management.Automation.PSCustomObject'
+                (Get-NewSubnetMask -NetworkBits $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
         }
     }
 
