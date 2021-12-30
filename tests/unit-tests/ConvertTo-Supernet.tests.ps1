@@ -91,14 +91,26 @@ Describe "ConvertTo-Supernet tests" {
         (ConvertTo-Supernet -IPAddress $Value)[1].Supernet | Should -BeNullOrEmpty
     }
 
-    It "Given a KeepInvalid parameter of `$false, it'll remove unsuitable subnets" -TestCases $ValidValueCases[0] {
-        param (
-            $Value,
-            $Result
-        )
-        (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[0].Supernet | Should -Not -BeNullOrEmpty
-        (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[1].Subnets | Should -BeNullOrEmpty
-        (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false).Count | Should -Be 1
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        It "Given a KeepInvalid parameter of `$false, it'll remove unsuitable subnets" -TestCases $ValidValueCases[0] {
+            param (
+                $Value,
+                $Result
+            )
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[0].Supernet | Should -Not -BeNullOrEmpty
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[1].Subnets | Should -BeNullOrEmpty
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false).Count | Should -Be 1
+        }
+    } else {
+        It "Given a KeepInvalid parameter of `$false, it'll remove unsuitable subnets" -TestCases $ValidValueCases[0] {
+            param (
+                $Value,
+                $Result
+            )
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[0].Supernet | Should -Not -BeNullOrEmpty
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[1].Subnets | Should -BeNullOrEmpty
+            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false).Length | Should -Be 1
+        }
     }
 
     It "Given no Format parameter, it'll output as a raw object" -TestCases $ValidValueCases[0] {

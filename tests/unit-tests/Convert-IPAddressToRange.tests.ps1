@@ -32,14 +32,14 @@ Describe "Convert-IPAddressToRange tests" {
             param (
                 $Value
             )
-                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('PSCustomObject', 'System.Object[]]')
+                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('PSCustomObject', 'System.Object[]')
         }
     } else {
         It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
             param (
                 $Value
             )
-                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('SystemObject[]]','System.Management.Automation.PSCustomObject')
+                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('System.Object[]','System.Management.Automation.PSCustomObject')
         }
     }
 
