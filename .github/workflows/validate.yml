@@ -45,7 +45,7 @@ jobs:
         shell: powershell
         run: |
           $PSVersionTable
-          (Get-ChildItem $env:GITHUB_WORKSPACE/PSSupernet -Recurse).FullName | Select-String -Pattern 'ps1$' | ForEach-Object {Invoke-ScriptAnalyzer -Path $_ -EnableExit}
+          (Get-ChildItem $env:GITHUB_WORKSPACE/PSSupernet -Recurse).FullName | Select-String -Pattern 'ps1$' | ForEach-Object {$_; Invoke-ScriptAnalyzer -Path $_ -EnableExit -ReportSummary}
           
       - name: Function unit tests
         shell: powershell

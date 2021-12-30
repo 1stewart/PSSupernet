@@ -64,7 +64,7 @@ Output format, one of `JSON`,`Human`,`None`. `Human` will scale to be readable i
 
 
 ### Requirements
-* PowerShell 5
+* PowerShell 5.1
 * PowerShell Core
 * Pester 5 (if want to run tests)
 

@@ -60,7 +60,7 @@ Describe "Split-SequentialIPRange tests" {
             param (
                 $Value
             )
-            (Split-SequentialIPRange -IPRange $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
+            (Split-SequentialIPRange -IPRange $Value).GetType() | Should -BeIn @('System.Object[]','System.Management.Automation.PSCustomObject')
         }
     }
 

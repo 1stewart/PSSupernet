@@ -39,7 +39,7 @@ Describe "Convert-IPAddressToRange tests" {
             param (
                 $Value
             )
-                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
+                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('SystemObject[]','System.Management.Automation.PSCustomObject')
         }
     }
 
