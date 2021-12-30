@@ -6,11 +6,14 @@ on:
       
 jobs:
   release:
+    if: |
+      github.actor == '1stewart' 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
 
-    - name: PSScriptAnalyzer tests
-      shell: pwsh
-      run: |
-        Get-ChildItem env:
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        name: "${{ github.ref_name }}"
