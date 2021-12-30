@@ -3,18 +3,17 @@ on:
   push:
     branches: 
       - master
-    tags:
-      - v*
       
 jobs:
   release:
     if: |
-      github.event_name == 'pull_request' && startsWith(github.ref_name ,'v') && github.ref_type == 'tag'
+      github.event_name == 'push' && startsWith(github.ref_name ,'v')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
+        title: "${{ github.ref_name }}"
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
