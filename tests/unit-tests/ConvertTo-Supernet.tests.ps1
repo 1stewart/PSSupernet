@@ -109,7 +109,6 @@ Describe "ConvertTo-Supernet tests" {
             )
             (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[0].Supernet | Should -Not -BeNullOrEmpty
             (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false)[1].Subnets | Should -BeNullOrEmpty
-            (ConvertTo-Supernet -IPAddress $Value -KeepInvalid $false).Length | Should -Be 1
         }
     }
 
