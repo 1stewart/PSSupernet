@@ -34,4 +34,3 @@ jobs:
           }
           $PesterConfiguration = New-PesterConfiguration -Hashtable $PesterConfigurationOptions
           Invoke-Pester -Configuration $PesterConfiguration
-
