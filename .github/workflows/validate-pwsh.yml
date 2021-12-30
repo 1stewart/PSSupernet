@@ -1,8 +1,6 @@
 name: Validate-PowerShellCore
 
 on:
-  push:
-    branches: []
   pull_request:
     branches: master
 
