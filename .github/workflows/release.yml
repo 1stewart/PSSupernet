@@ -15,4 +15,4 @@ jobs:
     - name: PSScriptAnalyzer tests
       shell: pwsh
       run: |
-        Get-ChildItem $env
+        Get-ChildItem env:
