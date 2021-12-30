@@ -16,8 +16,3 @@ jobs:
       shell: pwsh
       run: |
         Get-ChildItem $env
-    # - uses: "marvinpinto/action-automatic-releases@latest"
-    #   with:
-    #     title: "${{ github.ref_name }}"
-    #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #     prerelease: false
