@@ -64,8 +64,8 @@ Output format, one of `JSON`,`Human`,`None`. `Human` will scale to be readable i
 
 
 ### Requirements
-* PowerShell 5.1
-* PowerShell Core
+* PowerShell 5.1 ![example workflow](https://github.com/1stewart/PSSupernet/actions/workflows/validate-powershell.yml/badge.svg)
+* PowerShell Core ![example workflow](https://github.com/1stewart/PSSupernet/actions/workflows/validate-pwsh.yml/badge.svg)
 * Pester 5 (if want to run tests)
 
 ### Running tests
