@@ -26,12 +26,21 @@ Describe "Convert-IPAddressToRange tests" {
         { Convert-IPAddressToRange -IPAddress $Value } | Should -Throw
         { Convert-IPAddressToRange -IPAddress $Value } | Should -Throw -ExceptionType ([System.Management.Automation.ParameterBindingException])
     }
-
-    It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
-        param (
-            $Value
-        )
-            (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('PSCustomObject', 'System.Object[]')
+    
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -BeIn @('PSCustomObject', 'System.Object[]')
+        }
+    } else {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Convert-IPAddressToRange -IPAddress $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
+        }
     }
 
     It "Given a valid parameter value, it returns an object with all three properties" -TestCases $ValidValueCases {
