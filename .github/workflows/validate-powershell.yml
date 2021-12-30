@@ -1,0 +1,37 @@
+name: Validate-PowerShell
+
+on:
+  push:
+    branches: []
+  pull_request:
+    branches: master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+  validate-powershell:
+
+    runs-on: windows-2019
+    steps:
+
+      - uses: actions/checkout@v2
+      
+      - name: PSScriptAnalyzer tests
+        shell: powershell
+        run: |
+          $PSVersionTable
+          (Get-ChildItem $env:GITHUB_WORKSPACE/PSSupernet -Recurse).FullName | Select-String -Pattern 'ps1$' | ForEach-Object {$_; Invoke-ScriptAnalyzer -Path $_ -EnableExit -ReportSummary}
+          
+      - name: Function unit tests
+        shell: powershell
+        run: |
+          $PesterConfigurationOptions = @{ 
+            Run = @{ EnableExit = $true; Path = "$($env:GITHUB_WORKSPACE)/tests/unit-tests/" }; 
+            Output = @{ Verbosity = 'Detailed' };
+            CodeCoverage = @{ Enabled = $true; Path = @("PSSupernet/private","PSSupernet/public") }
+          }
+          $PesterConfiguration = New-PesterConfiguration -Hashtable $PesterConfigurationOptions
+          Invoke-Pester -Configuration $PesterConfiguration
+

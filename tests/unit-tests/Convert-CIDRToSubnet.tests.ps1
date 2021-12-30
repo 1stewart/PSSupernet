@@ -29,11 +29,20 @@ Describe "Convert-CIDRToSubnet tests" {
         { Convert-CIDRToSubnet -CIDR $Value } | Should -Throw -ExceptionType ([System.Management.Automation.ParameterBindingException])
     }
 
-    It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
-        param (
-            $Value
-        )
-            (Convert-CIDRToSubnet -CIDR $Value).GetType() | Should -Be 'PSCustomObject'
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Convert-CIDRToSubnet -CIDR $Value).GetType() | Should -Be 'PSCustomObject'
+        }
+    } else {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Convert-CIDRToSubnet -CIDR $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
+        }
     }
 
     It "Given a valid parameter value, it returns the expected output" -TestCases $ValidValueCases {

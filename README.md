@@ -41,6 +41,7 @@ Difference between subnets and supernets that'd be considered reasonable (e.g. 2
 |Accept wildcard characters:|False|
 
 `-KeepInvalid`
+
 Whether to include subnets that cannot be supernetted in output (ideal for concatenating valid and invalid)
 |||
 |-|-|
@@ -49,7 +50,9 @@ Whether to include subnets that cannot be supernetted in output (ideal for conca
 |Default Value:|True|
 |Accept pipeline input:|False|
 |Accept wildcard characters:|False|
+
 `-Format`
+
 Output format, one of `JSON`,`Human`,`None`. `Human` will scale to be readable in console, `None` will be a raw PS object.
 |||
 |-|-|
@@ -61,8 +64,8 @@ Output format, one of `JSON`,`Human`,`None`. `Human` will scale to be readable i
 
 
 ### Requirements
-* PowerShell 5
-* PowerShell Core
+* PowerShell 5.1 ![example workflow](https://github.com/1stewart/PSSupernet/actions/workflows/validate-powershell.yml/badge.svg)
+* PowerShell Core ![example workflow](https://github.com/1stewart/PSSupernet/actions/workflows/validate-pwsh.yml/badge.svg)
 * Pester 5 (if want to run tests)
 
 ### Running tests

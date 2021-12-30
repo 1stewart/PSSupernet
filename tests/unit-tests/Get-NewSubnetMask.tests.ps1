@@ -33,11 +33,20 @@ Describe "Get-NewSubnetMask tests" {
         { Get-NewSubnetMask -NetworkBits '10011110001011101001001100111010' } | Should -Throw 'Only one value provided, expected an array'
     }
 
-    It "Given a valid parameter value, it returns an integer" -TestCases $ValidValueCases {
-        param (
-            $Value
-        )
-            (Get-NewSubnetMask -NetworkBits $Value).GetType() | Should -Be 'PSCustomObject'
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        It "Given a valid parameter value, it returns an integer" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Get-NewSubnetMask -NetworkBits $Value).GetType() | Should -Be 'PSCustomObject'
+        }
+    } else {
+        It "Given a valid parameter value, it returns an integer" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+                (Get-NewSubnetMask -NetworkBits $Value).GetType() | Should -Be 'System.Management.Automation.PSCustomObject'
+        }
     }
 
     It "Given a valid parameter value, it returns the expected output" -TestCases $ValidValueCases {

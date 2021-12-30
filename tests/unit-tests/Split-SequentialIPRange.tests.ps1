@@ -44,16 +44,24 @@ Describe "Split-SequentialIPRange tests" {
         param (
             $Value
         )
-        { Split-SequentialIPRange -IPRange $Value } | Should -Throw
+        { Split-SequentialIPRange -IPRange   $Value } | Should -Throw
         { Split-SequentialIPRange -IPRange $Value } | Should -Throw -ExceptionType ([System.Management.Automation.ParameterBindingException])
 
     }
-
-    It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
-        param (
-            $Value
-        )
-        (Split-SequentialIPRange -IPRange $Value).GetType() | Should -BeIn @('System.Object[]','PSCustomObject')
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+            (Split-SequentialIPRange -IPRange $Value).GetType() | Should -BeIn @('System.Object[]','PSCustomObject')
+        }
+    } else {
+        It "Given a valid parameter value, it returns an object" -TestCases $ValidValueCases {
+            param (
+                $Value
+            )
+            (Split-SequentialIPRange -IPRange $Value).GetType() | Should -BeIn @('System.Object[]','System.Management.Automation.PSCustomObject')
+        }
     }
 
     It "Given a valid parameter value, it returns the expected output" -TestCases $ValidValueCases {
